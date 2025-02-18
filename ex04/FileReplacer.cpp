@@ -6,14 +6,14 @@
 /*   By: bfleitas <bfleitas@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:10:31 by bfleitas          #+#    #+#             */
-/*   Updated: 2025/02/17 18:30:59 by bfleitas         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:00:15 by bfleitas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FileReplacer.hpp"
 
 //Constructor
-FileReplacer::FileReplacer(std::string filename, std::string s1, std::string s2) : filename(filename), s1(s1), s2(s2)
+FileReplacer::FileReplacer(char *filename, std::string s1, std::string s2) : filename(filename), s1(s1), s2(s2)
 {
     std::cout << "FileReplacer created" << std::endl;
 }
@@ -43,7 +43,9 @@ int     FileReplacer::replace()
     std::ifstream file(filename);
     if (file.is_open())
     {
-        std::ofstream newfile(filename + ".replace");
+        std::string newFilename = filename;
+        newFilename += ".replace";
+        std::ofstream newfile(newFilename.c_str());
         std::string line;
         while (std::getline(file, line))
         {
